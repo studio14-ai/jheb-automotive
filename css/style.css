@@ -120,9 +120,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .nav__burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* overlay menu */
-.omenu { position: fixed; inset: 0; z-index: 49; background: rgba(0,0,0,0.97); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease); }
+.omenu { position: fixed; inset: 0; z-index: 49; background: rgba(0,0,0,0.97); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease); overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .omenu.is-open { opacity: 1; pointer-events: auto; }
-.omenu__inner { width: min(var(--container), 100% - 3rem); margin-inline: auto; height: 100%; padding-top: calc(var(--nav-h) + 4vh); display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; }
+.omenu__inner { width: min(var(--container), 100% - 3rem); margin-inline: auto; min-height: 100%; padding-top: calc(var(--nav-h) + 4vh); padding-bottom: 5vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: safe center; }
 .omenu__nav { display: flex; flex-direction: column; }
 .omenu__nav a { display: flex; align-items: baseline; gap: 1.2rem; font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.02em; padding: 0.5rem 0; color: var(--text); transition: color 0.2s, padding-left 0.3s var(--ease); border-bottom: 1px solid var(--line); }
 .omenu__nav a:hover { color: var(--accent); padding-left: 0.8rem; }
@@ -344,7 +344,7 @@ a.contact__row:hover { background: var(--panel-2); transform: translateX(4px); }
   .how__grid { grid-template-columns: repeat(2, 1fr); }
   .about__grid, .contact__grid, .ctaband__inner { grid-template-columns: 1fr; }
   .about__media { max-width: 460px; }
-  .omenu__inner { grid-template-columns: 1fr; align-content: center; gap: 2rem; }
+  .omenu__inner { grid-template-columns: 1fr; align-content: safe center; gap: 2rem; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .hero { display: block; min-height: auto; }
   .hero__inner { padding-bottom: 2.5rem; }
