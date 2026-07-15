@@ -240,9 +240,6 @@
       d.addEventListener("click", function () { show(x); });
     });
     show(0);
-    /* enable transitions + reveal non-active slides only after layout has settled,
-       so the parked (off-screen) position is in place before they become visible */
-    setTimeout(function () { heroSlides.classList.add("is-ready"); }, 60);
   }
 
   /* ── Sticky mobile bar after hero ── */
