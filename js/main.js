@@ -33,6 +33,24 @@
   omenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && burger.classList.contains("is-open")) setMenu(false); });
 
+  /* ── Hero content reveal on load (same animation as the scroll reveals,
+     but triggered directly so the above-the-fold hero never depends on the
+     IntersectionObserver firing and can't get stuck invisible) ── */
+  var heroReveals = document.querySelectorAll(".hero__inner .reveal");
+  if (heroReveals.length) {
+    if (reduceMotion) {
+      heroReveals.forEach(function (el) { el.classList.add("is-in"); });
+    } else {
+      /* small delay lets the initial opacity:0 paint so the transition animates */
+      setTimeout(function () {
+        heroReveals.forEach(function (el, i) {
+          el.style.setProperty("--d", (i * 70) + "ms");
+          el.classList.add("is-in");
+        });
+      }, 40);
+    }
+  }
+
   /* ── Hero typewriter ── */
   var typed = document.getElementById("typed");
   if (typed) {

@@ -359,6 +359,7 @@ a.contact__row:hover { background: var(--panel-2); transform: translateX(4px); }
   .gridlines span:nth-child(2), .gridlines span:nth-child(4) { display: none; }
   .nav__phone { display: none; }
   .nav__brand img { width: 96px; }
+  .hero__inner { padding-top: calc(var(--nav-h) + 4rem); }
   .hero__ctas .btn { width: 100%; }
   .stats__grid { grid-template-columns: 1fr; }
   .stat { border-left: none; border-top: 1px solid var(--line); }
