@@ -41,15 +41,13 @@
     if (reduceMotion) {
       heroReveals.forEach(function (el) { el.classList.add("is-in"); });
     } else {
-      /* small delay lets the initial opacity:0 paint so the transition animates.
-         Step each element by 1s (> the 0.9s transition) so they reveal one at a
-         time — each only starts once the previous has settled in place. */
-      setTimeout(function () {
-        heroReveals.forEach(function (el, i) {
-          el.style.setProperty("--d", (i * 1000) + "ms");
-          el.classList.add("is-in");
-        });
-      }, 40);
+      /* Reveal each element at a staggered REAL time (not via transition-delay)
+         so they appear one at a time — each 0.9s transition starts ~1s after the
+         previous, i.e. only once the previous has settled in place. The initial
+         60ms lets the opacity:0 state paint first so the transition animates. */
+      heroReveals.forEach(function (el, i) {
+        setTimeout(function () { el.classList.add("is-in"); }, 60 + i * 1000);
+      });
     }
   }
 
