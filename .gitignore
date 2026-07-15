@@ -1,0 +1,20 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / tooling
+.claude/
+
+# Internal working files — NOT part of the website
+docs/
+design-system/
+archive/
+images/
+JHEB Automotive Strategy.html
+
+# Source, backup, and unused images not served by the live site
+assets/*.jpg
+assets/*.png
+assets/opt/originals/
+assets/opt/oil-service.jpg
+assets/opt/tyres.jpg
