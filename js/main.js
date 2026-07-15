@@ -49,7 +49,7 @@
     }
   }
 
-  /* ── Services accordion (one open at a time, animated height) ── */
+  /* ── Services accordion (independent toggles, animated height) ── */
   var acc = document.getElementById("acc");
   if (acc) {
     var items = Array.prototype.slice.call(acc.querySelectorAll(".acc__item"));
@@ -68,18 +68,6 @@
       it.querySelector(".acc__head").setAttribute("aria-expanded", "false");
       p.style.height = "0px";
     }
-    /* collapse instantly (no animation) — used for the item being replaced so
-       the clicked header can be kept anchored without a transient jump */
-    function closeItemInstant(it) {
-      var p = panelOf(it);
-      var prev = p.style.transition;
-      p.style.transition = "none";
-      it.classList.remove("is-open");
-      it.querySelector(".acc__head").setAttribute("aria-expanded", "false");
-      p.style.height = "0px";
-      void p.offsetHeight;
-      p.style.transition = prev;
-    }
     /* init: open the first, others closed */
     items.forEach(function (it, idx) {
       var p = panelOf(it);
@@ -88,15 +76,9 @@
     });
     items.forEach(function (it) {
       it.querySelector(".acc__head").addEventListener("click", function () {
-        var head = it.querySelector(".acc__head");
-        var isOpen = it.classList.contains("is-open");
-        /* anchor the clicked header: closing an item above it shifts the page up,
-           so collapse others instantly and scroll to keep the header in place */
-        var topBefore = head.getBoundingClientRect().top;
-        items.forEach(function (other) { if (other !== it && other.classList.contains("is-open")) closeItemInstant(other); });
-        var shift = head.getBoundingClientRect().top - topBefore;
-        if (shift) window.scrollBy(0, shift);
-        if (isOpen) closeItem(it); else openItem(it);
+        /* toggle this item only — never touch others, so nothing above the tap
+           moves and the panel simply expands down from where it was tapped */
+        if (it.classList.contains("is-open")) closeItem(it); else openItem(it);
       });
     });
     /* keep open panel sized correctly on resize */
