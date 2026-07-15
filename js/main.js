@@ -109,6 +109,16 @@
     }
   }
 
+  /* ── Reviews marquee: pause while a finger is held on it (touch) ── */
+  var marquee = document.getElementById("marquee");
+  if (marquee) {
+    var pause = function () { marquee.classList.add("is-paused"); };
+    var resume = function () { marquee.classList.remove("is-paused"); };
+    marquee.addEventListener("touchstart", pause, { passive: true });
+    marquee.addEventListener("touchend", resume, { passive: true });
+    marquee.addEventListener("touchcancel", resume, { passive: true });
+  }
+
   /* ── Scroll reveals (staggered) ── */
   var revealEls = document.querySelectorAll(".reveal");
   if (reduceMotion || !("IntersectionObserver" in window)) {
