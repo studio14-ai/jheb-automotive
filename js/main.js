@@ -89,6 +89,24 @@
         items.forEach(function (it) { if (it.classList.contains("is-open")) panelOf(it).style.height = panelOf(it).scrollHeight + "px"; });
       }, 150);
     });
+    /* auto-collapse an open service once it has fully scrolled off the BOTTOM of
+       the viewport (i.e. the user scrolled back up past it). Only the bottom edge
+       is safe — collapsing an item above the viewport would shift the page and
+       reintroduce the jump. An item must have been seen first, so the default-open
+       first service isn't closed before it ever comes into view. */
+    if ("IntersectionObserver" in window) {
+      var seen = new WeakSet();
+      var accIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var it = entry.target;
+          if (entry.isIntersecting) { seen.add(it); return; }
+          if (!seen.has(it) || !it.classList.contains("is-open")) return;
+          var vpBottom = entry.rootBounds ? entry.rootBounds.bottom : window.innerHeight;
+          if (entry.boundingClientRect.top >= vpBottom) closeItem(it);
+        });
+      }, { threshold: 0 });
+      items.forEach(function (it) { accIo.observe(it); });
+    }
   }
 
   /* ── Scroll reveals (staggered) ── */
