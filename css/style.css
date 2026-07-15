@@ -336,6 +336,7 @@ a.contact__row:hover { background: var(--panel-2); transform: translateX(4px); }
 /* ══════════ REVEAL ══════════ */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0s); will-change: opacity, transform; }
 .reveal.is-in { opacity: 1; transform: none; }
+.hero__inner .reveal { transition-duration: 0.9s; }
 /* accordion rows reveal individually on scroll — no cumulative sibling-stagger */
 .acc__item.reveal { --d: 0s !important; }
 

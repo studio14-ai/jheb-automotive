@@ -41,10 +41,12 @@
     if (reduceMotion) {
       heroReveals.forEach(function (el) { el.classList.add("is-in"); });
     } else {
-      /* small delay lets the initial opacity:0 paint so the transition animates */
+      /* small delay lets the initial opacity:0 paint so the transition animates.
+         Step each element by 1s (> the 0.9s transition) so they reveal one at a
+         time — each only starts once the previous has settled in place. */
       setTimeout(function () {
         heroReveals.forEach(function (el, i) {
-          el.style.setProperty("--d", (i * 70) + "ms");
+          el.style.setProperty("--d", (i * 1000) + "ms");
           el.classList.add("is-in");
         });
       }, 40);
